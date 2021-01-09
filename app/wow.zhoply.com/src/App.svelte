@@ -4,14 +4,17 @@
 	import { createForm } from 'svelte-forms-lib'
 	import * as yup from 'yup'
 
+	const API_ACCOUNT_URL = process.env.isProd ? 'https://accountapi.wow.zhoply.com/' : 'http://localhost:8080/';
+	// const API_ACCOUNT_URL = 'https://accountapi.wow.zhoply.com/';
+
 	let isAcccountCreated = false
 	
-	function toastAcccountCreated(type, position) {
-    Toast.create({ message: 'Account created!', type, position })
+	function toastDisplay(type, message, position) {
+    Toast.create({ message, type, position })
   }
 
 	async function doPost (input) {
-		const res = await fetch('http://localhost:8080/register', {
+		const res = await fetch(`${API_ACCOUNT_URL}/register`, {
 			headers: { 'Content-Type': 'application/json' },
 			method: 'POST',
 			body: JSON.stringify({
@@ -46,12 +49,13 @@
 					Object.keys(res.json).map(errorKey => $errors[errorKey] = res.json[errorKey])
 				} else {
 					console.log('OK 200: ', res);
-					toastAcccountCreated('is-success')
+					toastDisplay('is-success', 'Account created!')
 					isAcccountCreated = true
 				}
 			}).catch((error) => {
 				// Handle uncontrolled errors, how to deal with these?
-				console.error('Error:', error);
+				console.error('Error!!:', error);
+				toastDisplay('is-danger', error)
 			});
 		}
 	})
@@ -63,6 +67,7 @@
 		$form.password = $form.username ? $form.username + '12' : ''
 	}
 
+	console.log('API_ACCOUNT_URL :>> ', API_ACCOUNT_URL);
 </script>
 
 <main class="columns is-mobile is-centered">
