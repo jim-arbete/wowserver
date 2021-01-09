@@ -23,6 +23,8 @@
   "dependencies": {
     "bulma": "^0.9.1",
     "sirv-cli": "^1.0.10",
-    "svelma": "^0.4.0"
+    "svelma": "^0.4.0",
+    "svelte-forms-lib": "^1.3.0",
+    "yup": "^0.32.8"
   }
 }
