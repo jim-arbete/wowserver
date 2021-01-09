@@ -205,10 +205,10 @@ function genHexString(len) {
 
 // console.log('----------');
 
-let digest   = crypto.createHash('sha1').update('HIONEYYY:ACERACER').digest();
+let digest   = crypto.createHash('sha1').update('HIONEYYY:aaaaaaaa').digest();
 let digestHex   = crypto.createHash('sha1').update(digest).digest('hex');
-// let digestHex   = crypto.createHash('sha1').update('HIONEYYY:ACERACER').digest('hex')
-// const password = "HIONEYYY:ACERACER"
+// let digestHex   = crypto.createHash('sha1').update('HIONEYYY:aaaaaaaa').digest('hex')
+// const password = "HIONEYYY:aaaaaaaa"
 // const hashResult = hashSSHA(password)
 // console.log("Check hash result: ", checkhashSSHA(hashResult.salt, password))
 // console.log('hashResult.salt :>> ', hashResult.salt.toLocaleUpperCase());
@@ -373,12 +373,12 @@ function computePrivateKey(username, password, _salt) {
 	const identity = hash('sha1', String(username).toUpperCase() + ':' + String(password).toUpperCase(), true)
 	const identity2 = sha1(String(username).toUpperCase() + ':' + String(password).toUpperCase())
 
-	// let digest   = crypto.createHash('sha1').update('HIONEYYY:ACERACER').digest();
+	// let digest   = crypto.createHash('sha1').update('HIONEYYY:aaaaaaaa').digest();
 	// let base64 = digest.toString(crypto.enc.Base64);
 	// let digestHex   = crypto.createHash('sha1').update(digest).digest('hex');
-	// let cryptohash = crypto.createHash('sha1').update('HIONEYYY:ACERACER').digest('base64')
+	// let cryptohash = crypto.createHash('sha1').update('HIONEYYY:aaaaaaaa').digest('base64')
 	// let digest = crypto.sha1(digest.concat(crypto.enc.Utf8.parse(salted)))
-	let salted = 'HIONEYYY:ACERACER'
+	let salted = 'HIONEYYY:aaaaaaaa'
 	let dig = CryptoJS.SHA1(CryptoJS.enc.Utf8.parse(salted));
 	let cryptohash = dig.toString(CryptoJS.enc.Base64) 
 	console.log('identity cryptohash:>> ', cryptohash);
@@ -462,7 +462,7 @@ console.log('BigInt :>> ', String(BigInt('0x22d13bb9bbea4d5323ec3c7b3c84d1723522
 console.log('----------');
 // Create your `account`-table v and s values.
 const username = 'hioneyyy'
-const password = 'aceracer'
+const password = 'aaaaaaaa'
 const salt = generateSalt()
 const verifier = generateVerifier(username, password, salt)
 
@@ -481,7 +481,7 @@ app.listen(3000, () => {
 
 	// hioneyyy => v = 231A5CCD3BE9F32C867192DC37C8C72A6E86E49CC2C9BA0F1D9A5F18B26E9C67
 	// s = F06F1912A4E4DB9B9B77E76D39AF7437FBCE84CD047957580C7DBB60C75FB235
-	// SHA1(CONCAT(UPPER('hioneyyy'), ':', UPPER('aceracer12#')))
+	// SHA1(CONCAT(UPPER('hioneyyy'), ':', UPPER('test#')))
 	// knex.raw('UPDATE account SET s = ? WHERE id = ?', [1, 7]).then(row => {
 	// 	console.log('row :>> ', row)
 	// })

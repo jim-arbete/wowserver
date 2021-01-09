@@ -21,7 +21,7 @@ use Laizerox\Wowemu\SRP\UserClient;
 
 /* If the form has been submitted. */
 $username = 'hioneyyy';
-$password = 'aceracer';
+$password = 'aaaaaa';
 
 /* Grab the users IP address. */
 $ip = $_SERVER['REMOTE_ADDR'];
