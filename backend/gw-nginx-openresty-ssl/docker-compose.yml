@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+
+    gateway:
+      build: .
+      container_name: gw-nginx-openresty-ssl
+      restart: unless-stopped
+      volumes:
+        - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      ports:
+       - "80:80"
+      networks:
+       - gw-nginx-openresty-ssl
+
+networks:
+  gw-nginx-openresty-ssl:
+    external:
+      name: backend_network
+
+
+# HELPERS:
+# docker-compose up --build
+# docker-compose exec gateway sh

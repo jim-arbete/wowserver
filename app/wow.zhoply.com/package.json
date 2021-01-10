@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "prodstart": "sirv public --quiet --gzip --maxage 31536000 --immutable --port 80"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",

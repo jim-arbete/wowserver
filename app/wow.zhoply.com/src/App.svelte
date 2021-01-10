@@ -4,8 +4,8 @@
 	import { createForm } from 'svelte-forms-lib'
 	import * as yup from 'yup'
 
-	const API_ACCOUNT_URL = process.env.isProd ? 'https://accountapi.wow.zhoply.com/' : 'http://localhost:8080/';
-	// const API_ACCOUNT_URL = 'https://accountapi.wow.zhoply.com/';
+	// const API_ACCOUNT_URL = process.env.isProd ? 'https://accountapi.wow.zhoply.com' : 'http://localhost:8080';
+	const API_ACCOUNT_URL = 'http://accountapi.wow.zhoply.com';
 
 	let isAcccountCreated = false
 	

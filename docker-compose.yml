@@ -1,0 +1,60 @@
+version: "3.5"
+services:
+
+    ## TODO => https://docs.docker.com/compose/extends/ prod and dev setups
+
+    gateway:
+      build: ./backend/gw-nginx-openresty-ssl
+      container_name: gw-nginx-openresty-ssl
+      restart: unless-stopped
+      volumes:
+        - ./backend/gw-nginx-openresty-ssl/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      ports:
+       - "80:80"
+       - "443:443"
+      networks:
+       - backend-network
+
+    frontend-wow:
+      # referens svelte https://erichemmerlin.medium.com/svelte-in-docker-deployed-to-netlify-d0054aabc454
+      build: ./app/wow.zhoply.com
+      container_name: wow.zhoply.com
+      restart: unless-stopped
+      ports:
+       - "8081:80"
+      networks:
+       - backend-network
+       
+    service-account-api:
+      image: nginx:1.19.6-alpine
+      container_name: accountapi.wow.zhoply.com
+      restart: unless-stopped
+      volumes:
+        - ./backend/service-php-api-account-cmangos-rest/:/var/www
+        - ./backend/service-php-api-account-cmangos-rest/phpdocker/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8080:80"
+      networks:
+       - backend-network
+
+    php-fpm:
+      build: ./backend/service-php-api-account-cmangos-rest/phpdocker
+        # context: .
+        # dockerfile: ./backend/service-php-api-account-cmangos-rest/phpdocker
+      restart: unless-stopped
+      volumes:
+        - ./backend/service-php-api-account-cmangos-rest/:/var/www:rw
+        - ./backend/service-php-api-account-cmangos-rest/phpdocker/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+      networks:
+       - backend-network
+
+networks:
+  backend-network:
+    external:
+      name: backend_network
+
+
+#docker-compose build frontend-wow
+#docker-compose build --no-cache php-fpm
+#docker-compose up -d --remove-orphans
+#docker-compose rm -f
